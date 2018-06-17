@@ -1,0 +1,23 @@
+package download_webpage;
+
+import java.io.*;
+import java.net.URL;
+
+public class download_webpage {
+
+    public static void main(String args[]) throws IOException {
+        String url = "http://cpk.msu.ru/rating/dep_01";
+        downloadWebPage(url);
+    }
+    public static void downloadWebPage(String webpage) throws IOException {
+            URL url = new URL(webpage);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("downloaded_url_test.html"));
+            String line;
+       	    while ((line = reader.readLine()) != null){
+                writer.write(line);
+            }
+            reader.close();
+            writer.close();
+    }
+}
