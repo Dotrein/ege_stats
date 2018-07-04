@@ -99,6 +99,7 @@ public class EgeStats {
                         rusString = rusString.replaceAll(" ", "");
                         rusString = rusString.replaceAll("<td>", "");
                         rusString = rusString.replaceAll("</td>", "");
+						rusString = rusString.replaceAll("(О)", "");
                         Double rusDouble = Double.parseDouble(rusString);
                         rusInt = rusDouble.intValue();
                         rus = rus + rusInt;
