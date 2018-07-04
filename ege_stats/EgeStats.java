@@ -17,12 +17,12 @@ public class EgeStats {
         priority = 3;
         countAverageScore(urlAddress3Priority, priority);
     }
-        public static void countAverageScore (String urlAddress, int priority) throws IOException {
+    public static void countAverageScore (String urlAddress, int priority) throws IOException {
         URL url = new URL(urlAddress);
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 
         String inputLine;
-        int kcp = 0;
+        int kcpInt = 0;
         int count = 0;
         int math = 0;
         int countMath = 0;
@@ -30,60 +30,67 @@ public class EgeStats {
         int countInform = 0;
         int countRus = 0;
         int rus = 0;
+        while (!(inputLine = reader.readLine()).contains("КЦП по конкурсу"))
+            ;
+        String kcpString = inputLine;
+        kcpString = kcpString.replaceAll("<b>КЦП по конкурсу:</b>", "");
+        kcpString = kcpString.replaceAll("<br />", "");
+        kcpString = kcpString.replaceAll(" ", "");
+        kcpInt = Integer.parseInt(kcpString);
         while (!(inputLine = reader.readLine()).equals("<tbody>"))
             ;
 
         while (inputLine != null){
-        for (int i = 0; i < 19; i++) {
-            inputLine = reader.readLine();
-            if (i == 9) { //Math
-                String mathString = inputLine;
+            for (int i = 0; i < 19; i++) {
+                inputLine = reader.readLine();
+                if (i == 9) { //Math
+                    String mathString = inputLine;
 
-                try {
-                    mathString = mathString.replaceAll(" ", "");
-                    mathString = mathString.replaceAll("<td>", "");
-                    mathString = mathString.replaceAll("</td>", "");
-                    Double mathDouble = Double.parseDouble(mathString);
-                    int mathInt = mathDouble.intValue();
-                    math = math + mathInt;
-                    countMath++;
-                } catch (Exception e) {
-                    System.out.print("");
+                    try {
+                        mathString = mathString.replaceAll(" ", "");
+                        mathString = mathString.replaceAll("<td>", "");
+                        mathString = mathString.replaceAll("</td>", "");
+                        Double mathDouble = Double.parseDouble(mathString);
+                        int mathInt = mathDouble.intValue();
+                        math = math + mathInt;
+                        countMath++;
+                    } catch (Exception e) {
+                        System.out.print("");
+                    }
                 }
-            }
 
-            if (i == 10) { //Informatics
-                String informString = inputLine;
+                if (i == 10) { //Informatics
+                    String informString = inputLine;
 
-                try {
-                    informString = informString.replaceAll(" ", "");
-                    informString = informString.replaceAll("<td>", "");
-                    informString = informString.replaceAll("</td>", "");
-                    Double informDouble = Double.parseDouble(informString);
-                    int informInt = informDouble.intValue();
-                    inform = inform + informInt;
-                    countInform++;
-                } catch (Exception e) {
-                    System.out.print("");
+                    try {
+                        informString = informString.replaceAll(" ", "");
+                        informString = informString.replaceAll("<td>", "");
+                        informString = informString.replaceAll("</td>", "");
+                        Double informDouble = Double.parseDouble(informString);
+                        int informInt = informDouble.intValue();
+                        inform = inform + informInt;
+                        countInform++;
+                    } catch (Exception e) {
+                        System.out.print("");
+                    }
                 }
-            }
 
-            if (i == 11) { //Rus
-                String rusString = inputLine;
-                int rusInt;
-                try {
-                    rusString = rusString.replaceAll(" ", "");
-                    rusString = rusString.replaceAll("<td>", "");
-                    rusString = rusString.replaceAll("</td>", "");
-                    Double rusDouble = Double.parseDouble(rusString);
-                    rusInt = rusDouble.intValue();
-                    rus = rus + rusInt;
-                    countRus++;
+                if (i == 11) { //Rus
+                    String rusString = inputLine;
+                    int rusInt;
+                    try {
+                        rusString = rusString.replaceAll(" ", "");
+                        rusString = rusString.replaceAll("<td>", "");
+                        rusString = rusString.replaceAll("</td>", "");
+                        Double rusDouble = Double.parseDouble(rusString);
+                        rusInt = rusDouble.intValue();
+                        rus = rus + rusInt;
+                        countRus++;
+                    }
+                    catch (Exception e) {
+                        System.out.print("");
+                    }
                 }
-                catch (Exception e) {
-                    System.out.print("");
-                }
-            }
             /*if (i == 13){
                 String isOriginal = inputLine;
                 isOriginal = isOriginal.replaceAll("<td>", "");
@@ -97,19 +104,20 @@ public class EgeStats {
 
 
 
-        }
+            }
 
         }
-            System.out.print("Средние баллы по ");
-            System.out.print(priority);
-            System.out.println(" приоритету:");
-            System.out.print("Средний балл по математике - ");
-            System.out.println((double) math/countMath);
-            System.out.print("Средний балл по информатике - ");
-            System.out.println((double) inform/countInform);
-            System.out.print("Средний балл по русскому языку - ");
-            System.out.println((double) rus/countRus);
-            System.out.println("");
+        System.out.print(priority);
+        System.out.println(" приоритет:");
+        System.out.print("Количество бюджетных мест - ");
+        System.out.println(kcpInt);
+        System.out.print("Средний балл по математике - ");
+        System.out.println((double) math/countMath);
+        System.out.print("Средний балл по информатике - ");
+        System.out.println((double) inform/countInform);
+        System.out.print("Средний балл по русскому языку - ");
+        System.out.println((double) rus/countRus);
+        System.out.println("");
 
         reader.close();
     }
