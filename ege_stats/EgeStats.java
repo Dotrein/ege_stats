@@ -30,6 +30,8 @@ public class EgeStats {
         int countInform = 0;
         int countRus = 0;
         int rus = 0;
+        int totalScore = 0;
+        int countTotalScore = 0;
         while (!(inputLine = reader.readLine()).contains("КЦП по конкурсу"))
             ;
         String kcpString = inputLine;
@@ -43,13 +45,28 @@ public class EgeStats {
         while (inputLine != null){
             for (int i = 0; i < 19; i++) {
                 inputLine = reader.readLine();
+                if (i == 7){
+                    String totalScoreString = inputLine;
+                    try{
+                        totalScoreString = totalScoreString.replaceAll(" ", "");
+                        totalScoreString = totalScoreString.replaceAll("<td>", "");
+                        totalScoreString = totalScoreString.replaceAll("</td>", "");
+                        totalScoreString = totalScoreString.replace(",", ".");
+                        Double totalScoreDouble = Double.parseDouble(totalScoreString);
+                        int totalScoreInt = totalScoreDouble.intValue();
+                        totalScore = totalScore + totalScoreInt;
+                        countTotalScore++;
+                    }
+                    catch (Exception e){
+                        System.out.print("");
+                    }
+                }
                 if (i == 9) { //Math
                     String mathString = inputLine;
-
                     try {
-                        mathString = mathString.replaceAll(" ", "");
                         mathString = mathString.replaceAll("<td>", "");
                         mathString = mathString.replaceAll("</td>", "");
+                        mathString = mathString.replaceAll(" ", "");
                         Double mathDouble = Double.parseDouble(mathString);
                         int mathInt = mathDouble.intValue();
                         math = math + mathInt;
@@ -111,6 +128,8 @@ public class EgeStats {
         System.out.println(" приоритет:");
         System.out.print("Количество бюджетных мест - ");
         System.out.println(kcpInt);
+        System.out.print("Средний балл по всем предметам - ");
+        System.out.println((double) totalScore/countTotalScore);
         System.out.print("Средний балл по математике - ");
         System.out.println((double) math/countMath);
         System.out.print("Средний балл по информатике - ");
