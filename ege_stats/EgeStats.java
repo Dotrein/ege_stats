@@ -11,13 +11,13 @@ public class EgeStats {
         String urlAddress2Priority = "https://cabinet.spbu.ru/Lists/1k_EntryLists/list_ecbc3a5c-44f6-4bb4-bb9c-ddd1615cc3a6.html#8ad38e9e-903f-424e-9026-eb4205beb1a6";
         String urlAddress3Priority = "https://cabinet.spbu.ru/Lists/1k_EntryLists/list_60725d3e-3d0e-4fc5-8051-1dfc11c13663.html#91a0cc93-d3a2-4eb1-8718-224b7d70590a";
         int priority = 1;
-        AverageScore(urlAddress1Priority, priority);
+        countAverageScore(urlAddress1Priority, priority);
         priority = 2;
-        AverageScore(urlAddress2Priority, priority);
+        countAverageScore(urlAddress2Priority, priority);
         priority = 3;
-        AverageScore(urlAddress3Priority, priority);
+        countAverageScore(urlAddress3Priority, priority);
     }
-        public static void AverageScore (String urlAddress, int priority) throws IOException {
+        public static void countAverageScore (String urlAddress, int priority) throws IOException {
         URL url = new URL(urlAddress);
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 
