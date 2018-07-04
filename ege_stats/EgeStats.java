@@ -32,6 +32,11 @@ public class EgeStats {
         int rus = 0;
         int totalScore = 0;
         int countTotalScore = 0;
+		//int mathYes = 0;
+        //int informYes = 0;
+        //int rusYes = 0;
+        //int totalScoreYes = 0;
+        //int countYes = 0;
         while (!(inputLine = reader.readLine()).contains("КЦП по конкурсу"))
             ;
         String kcpString = inputLine;
@@ -110,15 +115,27 @@ public class EgeStats {
                     }
                 }
             /*if (i == 13){
-                String isOriginal = inputLine;
-                isOriginal = isOriginal.replaceAll("<td>", "");
-                isOriginal = isOriginal.replaceAll("</td>", "");
-                if (isOriginal.equals("Нет")){
-                    math = math - mathInt;
-                    inform = inform - informInt;
-                    rus = rus - rusInt;
-                }
-            }*/
+                    String isOriginal = inputLine;
+                    try {
+                        isOriginal = isOriginal.replaceAll("<td>", "");
+                        isOriginal = isOriginal.replaceAll("</td>", "");
+                        isOriginal = isOriginal.replaceAll(" ", "");
+                        if (isOriginal.equals("Да")){
+                            scoreOfYes.add(totalScoreInt);
+                            countYes++;
+                        }
+                        else {
+                            totalScoreYes = totalScore - totalScoreInt;
+                            mathYes = math - mathInt;
+                            informYes = inform - informInt;
+                            rusYes = rus - rusInt;
+                        }
+
+                    }
+                    catch (Exception e){
+                        System.out.print("");
+                    }
+                }*/
 
 
 
