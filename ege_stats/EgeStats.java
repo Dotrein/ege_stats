@@ -74,25 +74,28 @@ public class EgeStats {
                 }
             }
         }
-            double averMath = (double) math/countMath;
-            double averInform = (double) inform/countInform;
-            double averRus = (double) rus/countRus;
-            printAverageMath(averMath);
-            printAverageInform(averInform);
-            printAverageRus(averRus);
+		
+		/*if (i == 13){
+                String isOriginal = inputLine;
+                isOriginal = isOriginal.replaceAll("<td>", "");
+                isOriginal = isOriginal.replaceAll("</td>", "");
+                if (isOriginal.equals("Нет")){
+                    math = math - mathInt;
+                    inform = inform - informInt;
+                    rus = rus - rusInt;
+                }
+            }*/
+		
+            
         }
+			
+			System.out.print("Средний балл по математике - ");
+			System.out.println((double) math/countMath);
+			System.out.print("Средний балл по информатике - ");
+			System.out.println((double) inform/countInform);
+			System.out.print("Средний балл по русскому языку - ");
+			System.out.println((double) rus/countRus);
+			
         reader.close();
-    }
-    public static void printAverageMath (double averageMath) {
-		System.out.print("Средний балл по математике - ");
-        System.out.println(averageMath);
-    }
-    public static void printAverageInform (double averageInform) {
-		System.out.print("Средний балл по информатике - ");
-        System.out.println(averageInform);
-    }
-    public static void printAverageRus (double averageRus) {
-		System.out.print("Средний балл по русскому языку - ");
-        System.out.println(averageRus);
     }
 }
