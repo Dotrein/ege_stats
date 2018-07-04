@@ -37,7 +37,7 @@ public class EgeStats {
                     math = math + mathInt;
                     countMath++;
                 } catch (Exception e) {
-                    System.out.println(e);
+                    System.out.print("");
                 }
             }
 
@@ -53,7 +53,7 @@ public class EgeStats {
                     inform = inform + informInt;
                     countInform++;
                 } catch (Exception e) {
-                    System.out.println(e);
+                    System.out.print("");
                 }
             }
 
@@ -70,7 +70,7 @@ public class EgeStats {
                     countRus++;
                 }
                 catch (Exception e) {
-                    System.out.println(e);
+                    System.out.print("");
                 }
             }
         }
@@ -84,12 +84,15 @@ public class EgeStats {
         reader.close();
     }
     public static void printAverageMath (double averageMath) {
+		System.out.print("Средний балл по математике - ");
         System.out.println(averageMath);
     }
     public static void printAverageInform (double averageInform) {
+		System.out.print("Средний балл по информатике - ");
         System.out.println(averageInform);
     }
     public static void printAverageRus (double averageRus) {
+		System.out.print("Средний балл по русскому языку - ");
         System.out.println(averageRus);
     }
 }
