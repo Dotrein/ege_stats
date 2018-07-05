@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class EgeStats {
     public static void main(String[] args) throws IOException {
@@ -17,11 +19,13 @@ public class EgeStats {
         priority = 3;
         countAverageScore(urlAddress3Priority, priority);
     }
-    public static void countAverageScore (String urlAddress, int priority) throws IOException {
+    public static void countAverageScore (String urlAddress, int priority) throws NullPointerException, IOException {
         URL url = new URL(urlAddress);
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 
         String inputLine;
+        int gordienko = 0;
+        int totalScoreGordienko = 0;
         int kcpInt = 0;
         int count = 0;
         int math = 0;
@@ -31,17 +35,20 @@ public class EgeStats {
         int countRus = 0;
         int rus = 0;
         int totalScore = 0;
+        int totalScoreInt = 0;
         int countTotalScore = 0;
-		int totalScoreInt = 0;
-		int mathInt = 0;
+        int mathInt = 0;
         int informInt = 0;
         int rusInt = 0;
-		int mathYes = 0;
+        int mathYes = 0;
         int informYes = 0;
         int rusYes = 0;
         int totalScoreYes = 0;
         int countYes = 0;
-		//ArrayList<Integer> scoreOfYes = new ArrayList<>();
+        int countMathYes = 0;
+        int countInformYes = 0;
+        int countRusYes = 0;
+        ArrayList<Integer> scoreOfYes = new ArrayList<>();
         while (!(inputLine = reader.readLine()).contains("КЦП по конкурсу"))
             ;
         String kcpString = inputLine;
@@ -55,6 +62,14 @@ public class EgeStats {
         while (inputLine != null){
             for (int i = 0; i < 19; i++) {
                 inputLine = reader.readLine();
+                try{
+                if (i == 3 && inputLine.contains("Гордиенко")){ //Почему-то условие выполняется всегда
+                    gordienko = 1;
+                }
+                }
+                catch (Exception e){
+                    System.out.println("");
+                }
                 if (i == 7){
                     String totalScoreString = inputLine;
                     try{
@@ -66,6 +81,10 @@ public class EgeStats {
                         totalScoreInt = totalScoreDouble.intValue();
                         totalScore = totalScore + totalScoreInt;
                         countTotalScore++;
+                        if (gordienko == 1){
+                            scoreOfYes.add(totalScoreInt); //из-за этого всегда сюда добавляются значения
+                            totalScoreGordienko = totalScoreInt;
+                        }
                     }
                     catch (Exception e){
                         System.out.print("");
@@ -103,12 +122,12 @@ public class EgeStats {
                 }
 
                 if (i == 11) { //Rus
-                    String rusString = inputLine;               
+                    String rusString = inputLine;
                     try {
                         rusString = rusString.replaceAll(" ", "");
                         rusString = rusString.replaceAll("<td>", "");
                         rusString = rusString.replaceAll("</td>", "");
-						rusString = rusString.replaceAll("(О)", "");
+                        rusString = rusString.replaceAll("(О)", "");
                         Double rusDouble = Double.parseDouble(rusString);
                         rusInt = rusDouble.intValue();
                         rus = rus + rusInt;
@@ -125,7 +144,7 @@ public class EgeStats {
                         isOriginal = isOriginal.replaceAll("</td>", "");
                         isOriginal = isOriginal.replaceAll(" ", "");
                         if (isOriginal.equals("Да")){
-                            //scoreOfYes.add(totalScoreInt);
+                            scoreOfYes.add(totalScoreInt);
                             totalScoreYes = totalScoreYes + totalScoreInt;
                             mathYes = mathYes + mathInt;
                             informYes = informYes + informInt;
@@ -138,12 +157,12 @@ public class EgeStats {
                         System.out.print("");
                     }
                 }
-
-
-
             }
-
         }
+        Collections.sort(scoreOfYes);
+        Collections.reverse(scoreOfYes);
+        int place = scoreOfYes.indexOf(totalScoreGordienko);
+
         System.out.print(priority);
         System.out.println(" приоритет:");
         System.out.print("Количество бюджетных мест - ");
@@ -157,8 +176,8 @@ public class EgeStats {
         System.out.print("Средний балл по русскому языку - ");
         System.out.println((double) rus/countRus);
         System.out.println("");
-		
-		System.out.print("Средний балл по всем предметам среди подавших оригинал - ");
+
+        System.out.print("Средний балл по всем предметам среди подавших оригинал - ");
         System.out.println((double) totalScoreYes/countYes);
         System.out.print("Средний балл по математике среди подавших оригинал - ");
         System.out.println((double) mathYes/countYes);
@@ -166,6 +185,8 @@ public class EgeStats {
         System.out.println((double) informYes/countYes);
         System.out.print("Средний балл по русскому языку среди подавших оригинал - ");
         System.out.println((double) rusYes/countYes);
+        System.out.print("Место среди подавших оригинал - ");
+        System.out.println(place);
         System.out.println("");
 
         reader.close();
