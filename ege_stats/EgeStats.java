@@ -32,11 +32,16 @@ public class EgeStats {
         int rus = 0;
         int totalScore = 0;
         int countTotalScore = 0;
-		//int mathYes = 0;
-        //int informYes = 0;
-        //int rusYes = 0;
-        //int totalScoreYes = 0;
-        //int countYes = 0;
+		int totalScoreInt = 0;
+		int mathInt = 0;
+        int informInt = 0;
+        int rusInt = 0;
+		int mathYes = 0;
+        int informYes = 0;
+        int rusYes = 0;
+        int totalScoreYes = 0;
+        int countYes = 0;
+		//ArrayList<Integer> scoreOfYes = new ArrayList<>();
         while (!(inputLine = reader.readLine()).contains("КЦП по конкурсу"))
             ;
         String kcpString = inputLine;
@@ -58,7 +63,7 @@ public class EgeStats {
                         totalScoreString = totalScoreString.replaceAll("</td>", "");
                         totalScoreString = totalScoreString.replace(",", ".");
                         Double totalScoreDouble = Double.parseDouble(totalScoreString);
-                        int totalScoreInt = totalScoreDouble.intValue();
+                        totalScoreInt = totalScoreDouble.intValue();
                         totalScore = totalScore + totalScoreInt;
                         countTotalScore++;
                     }
@@ -73,7 +78,7 @@ public class EgeStats {
                         mathString = mathString.replaceAll("</td>", "");
                         mathString = mathString.replaceAll(" ", "");
                         Double mathDouble = Double.parseDouble(mathString);
-                        int mathInt = mathDouble.intValue();
+                        mathInt = mathDouble.intValue();
                         math = math + mathInt;
                         countMath++;
                     } catch (Exception e) {
@@ -89,7 +94,7 @@ public class EgeStats {
                         informString = informString.replaceAll("<td>", "");
                         informString = informString.replaceAll("</td>", "");
                         Double informDouble = Double.parseDouble(informString);
-                        int informInt = informDouble.intValue();
+                        informInt = informDouble.intValue();
                         inform = inform + informInt;
                         countInform++;
                     } catch (Exception e) {
@@ -98,8 +103,7 @@ public class EgeStats {
                 }
 
                 if (i == 11) { //Rus
-                    String rusString = inputLine;
-                    int rusInt;
+                    String rusString = inputLine;               
                     try {
                         rusString = rusString.replaceAll(" ", "");
                         rusString = rusString.replaceAll("<td>", "");
@@ -114,28 +118,26 @@ public class EgeStats {
                         System.out.print("");
                     }
                 }
-            /*if (i == 13){
+            if (i == 13){
                     String isOriginal = inputLine;
                     try {
                         isOriginal = isOriginal.replaceAll("<td>", "");
                         isOriginal = isOriginal.replaceAll("</td>", "");
                         isOriginal = isOriginal.replaceAll(" ", "");
                         if (isOriginal.equals("Да")){
-                            scoreOfYes.add(totalScoreInt);
+                            //scoreOfYes.add(totalScoreInt);
+                            totalScoreYes = totalScoreYes + totalScoreInt;
+                            mathYes = mathYes + mathInt;
+                            informYes = informYes + informInt;
+                            rusYes = rusYes + rusInt;
                             countYes++;
-                        }
-                        else {
-                            totalScoreYes = totalScore - totalScoreInt;
-                            mathYes = math - mathInt;
-                            informYes = inform - informInt;
-                            rusYes = rus - rusInt;
                         }
 
                     }
                     catch (Exception e){
                         System.out.print("");
                     }
-                }*/
+                }
 
 
 
@@ -154,6 +156,16 @@ public class EgeStats {
         System.out.println((double) inform/countInform);
         System.out.print("Средний балл по русскому языку - ");
         System.out.println((double) rus/countRus);
+        System.out.println("");
+		
+		System.out.print("Средний балл по всем предметам среди подавших оригинал - ");
+        System.out.println((double) totalScoreYes/countYes);
+        System.out.print("Средний балл по математике среди подавших оригинал - ");
+        System.out.println((double) mathYes/countYes);
+        System.out.print("Средний балл по информатике среди подавших оригинал - ");
+        System.out.println((double) informYes/countYes);
+        System.out.print("Средний балл по русскому языку среди подавших оригинал - ");
+        System.out.println((double) rusYes/countYes);
         System.out.println("");
 
         reader.close();
